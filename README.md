@@ -35,10 +35,11 @@ while true; do
   timestamp=$(date +"%Y%m%d_%H%M%S")
   output_file="${output_dir}/audio_${timestamp}.mp3"
 
-  # Record audio in a segment (e.g., 5 minutes)
-  ffmpeg -f alsa -i default -c:a libmp3lame -b:a 192k -t 300 "$output_file"
+  # Record audio in a segment (e.g., 5 minutes) with better quality settings
+  ffmpeg -f alsa -i default -c:a libmp3lame -b:a 320k -ar 48000 -t 300 "$output_file"
 
   # Add a small delay between segments to ensure proper file closing
   sleep 1
 done
+
 ```
