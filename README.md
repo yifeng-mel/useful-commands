@@ -10,3 +10,8 @@ libcamera-vid --bitrate 50000000 --codec h264 --framerate 20 --height 768 --widt
 ```
 libcamera-vid --bitrate 50000000 --codec h264 --framerate 20 --height 768 --width 1080 --timeout 0 -o video.h264
 ```
+
+## Convert .h264 to .mp4
+```
+ffmpeg -i video.h264 -c:v copy video.mp4
+```
