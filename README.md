@@ -20,3 +20,25 @@ libcamera-vid --bitrate 50000000 --codec h264 --framerate 20 --height 768 --widt
 ```
 ffmpeg -i video.h264 -c:v copy video.mp4
 ```
+
+## Recording audio
+```
+#!/bin/bash
+
+# Directory where audio files will be saved
+output_dir="/home/pi/audios"
+mkdir -p "$output_dir"
+
+# Infinite loop to keep recording
+while true; do
+  # Generate a timestamp for each segment
+  timestamp=$(date +"%Y%m%d_%H%M%S")
+  output_file="${output_dir}/audio_${timestamp}.mp3"
+
+  # Record audio in a segment (e.g., 5 minutes)
+  ffmpeg -f alsa -i default -c:a libmp3lame -b:a 192k -t 300 "$output_file"
+
+  # Add a small delay between segments to ensure proper file closing
+  sleep 1
+done
+```
